@@ -1,11 +1,13 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import ModalC from "./ModalC";
 
 const ModalB = ({ showModalB, setShowModalA, setShowModalB }) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isEven, setIsEven] = useState(false);
 
+  const [showModalC, setShowModalC] = useState(false);
   // filter data isEven
   let filterData = data;
   if (isEven) {
@@ -41,6 +43,10 @@ const ModalB = ({ showModalB, setShowModalA, setShowModalB }) => {
         setLoading(false);
       });
   }, []);
+
+  const openModalC = () => {
+    setShowModalC(true);
+  };
   return (
     <>
       {showModalB && (
@@ -86,7 +92,12 @@ const ModalB = ({ showModalB, setShowModalA, setShowModalB }) => {
               </div>
               <div className="modal-body">
                 {filterData?.map((item) => (
-                  <div className="border" key={item.id}>
+                  <div
+                    onClick={openModalC}
+                    className="border"
+                    key={item.id}
+                    style={{ cursor: "pointer" }}
+                  >
                     <p>{item.phone}</p>
                   </div>
                 ))}
@@ -94,6 +105,9 @@ const ModalB = ({ showModalB, setShowModalA, setShowModalB }) => {
             </div>
           </div>
         </div>
+      )}
+      {showModalC && (
+        <ModalC showModalC={showModalC} openModalC={setShowModalC} />
       )}
     </>
   );

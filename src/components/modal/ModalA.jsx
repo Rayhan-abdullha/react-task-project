@@ -99,17 +99,17 @@ const ModalA = ({ showModalA, setShowModalA, setShowModalB }) => {
                       className="border"
                       style={{ cursor: "pointer" }}
                     >
-                      <p>{item.phone}</p>
+                      <p onClick={openModalC}>{item.phone}</p>
                     </div>
-                    {showModalC && (
-                      <ModalC showModalC={showModalC} item={item} />
-                    )}
                   </div>
                 ))}
               </div>
             </div>
           </div>
         </div>
+      )}
+      {showModalC && (
+        <ModalC showModalC={showModalC} openModalC={setShowModalC} />
       )}
     </>
   );
